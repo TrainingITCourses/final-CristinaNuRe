@@ -7,11 +7,17 @@ import { StatusListPresenterComponent } from './status-list-presenter/status-lis
 import { StatusDetailContainerComponent } from './status-detail-container/status-detail-container.component';
 import { LaunchesCounterPresenterComponent } from './launches-counter-presenter/launches-counter-presenter.component';
 import { LaunchesListPresenterComponent } from './launches-list-presenter/launches-list-presenter.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromStatus from './store/status.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StatusEffects } from './store/status.effects';
 
 @NgModule({
   imports: [
     CommonModule,
-    StatusRoutingModule
+    StatusRoutingModule,
+    StoreModule.forFeature('status', fromStatus.reducer),
+    EffectsModule.forFeature([StatusEffects])
   ],
   declarations: [StatusContainerComponent, StatusListPresenterComponent, StatusDetailContainerComponent, LaunchesCounterPresenterComponent, LaunchesListPresenterComponent]
 })

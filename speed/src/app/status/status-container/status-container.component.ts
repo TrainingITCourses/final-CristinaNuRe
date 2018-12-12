@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/store';
+import { LoadStatus } from '../store/status.actions';
 
 @Component({
   selector: 'app-status-container',
@@ -7,14 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusContainerComponent implements OnInit {
 
-  constructor() { }
+  public status;
+
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    this.loadStatus();
+    this.loadAllStatus();
   }
 
-  private loadStatus() {
-        // TODO cargar aqui todos los estados
-        console.log('Se carga lista de estados');
+  private loadAllStatus() {
+    console.log('Se carga lista de estados');
+    this.store.dispatch(new LoadStatus());
   }
 }

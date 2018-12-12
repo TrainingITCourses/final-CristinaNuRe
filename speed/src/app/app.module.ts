@@ -9,6 +9,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './store';
 import { environment } from 'src/environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+import { StatusEffects } from './status/store/status.effects';
+import { LaunchEffects } from './launches/store/launch.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,10 +22,12 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),    
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),  
+    EffectsModule.forRoot([StatusEffects, LaunchEffects]) 
   ],
   providers: [],
   bootstrap: [AppComponent]
