@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-status-list-presenter',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status-list-presenter.component.css']
 })
 export class StatusListPresenterComponent implements OnInit {
+
+  @Input() public statusList;
 
   constructor() { }
 

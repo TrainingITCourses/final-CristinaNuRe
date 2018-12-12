@@ -10,6 +10,11 @@ export class StatusContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.loadStatus();
   }
 
+  private loadStatus() {
+        // TODO cargar aqui todos los estados
+        console.log('Se carga lista de estados');
+  }
 }
