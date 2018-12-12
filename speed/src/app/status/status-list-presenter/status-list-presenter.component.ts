@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StatusListPresenterComponent implements OnInit {
 
-  @Input() public statusList;
+  @Input() public statusList: any[];
 
   constructor() { }
 

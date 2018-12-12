@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { StatusActionTypes, StatusLoaded } from './status.actions';
+import { StatusActionTypes, StatusLoaded, LaunchesLoaded } from './status.actions';
 import { ApiService } from 'src/app/store/services/api.service';
 import { mergeMap, map } from 'rxjs/operators';
 
@@ -8,9 +8,16 @@ import { mergeMap, map } from 'rxjs/operators';
 export class StatusEffects {
 
   @Effect()
-  public load$ = this.actions$.ofType(StatusActionTypes.LoadStatus).pipe(
+  public loadStatus$ = this.actions$.ofType(StatusActionTypes.LoadStatus).pipe(
     mergeMap(() => this.api.getLaunchStatus$().pipe(
         map(allLaunchStatus => new StatusLoaded(allLaunchStatus))
+      ))
+  );
+
+  @Effect()
+  public loadLaunches$ = this.actions$.ofType(StatusActionTypes.LoadLaunches).pipe(
+    mergeMap(() => this.api.getLaunches$().pipe(
+        map(allLaunches => new LaunchesLoaded(allLaunches))
       ))
   );
 

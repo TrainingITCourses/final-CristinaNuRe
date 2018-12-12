@@ -15,11 +15,11 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    public getLaunches$ = (): Observable<any[]> =>
+    public getLaunches$ = (): Observable<any> =>
         this.http.get(this.url + this.launchesEndPoint)
             .pipe(map((res: any) => res.launches));
 
-    public getLaunchStatus$ = (): Observable<any[]> =>
+    public getLaunchStatus$ = (): Observable<any> =>
         this.http.get(this.url + this.launchStatusEndPoint)
             .pipe(map((res: any) => res.types));
 }
