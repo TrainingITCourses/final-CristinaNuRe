@@ -16,6 +16,8 @@ import { LaunchEffects } from './store/launch.effects';
     StoreModule.forFeature('launch', fromLaunch.reducer),
     EffectsModule.forFeature([LaunchEffects])
   ],
-  declarations: [LaunchDetailContainerComponent, LaunchDetailPresenterComponent]
+  declarations: [
+    LaunchDetailContainerComponent, 
+    LaunchDetailPresenterComponent]
 })
 export class LaunchesModule { }

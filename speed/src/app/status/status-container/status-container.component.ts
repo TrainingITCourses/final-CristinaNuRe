@@ -3,6 +3,9 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/store';
 import { LoadStatus } from '../store/status.actions';
 import { StatusState } from '../store/status.reducer';
+import { GlobalState } from 'src/app/store/global-state.reducer';
+import { ChangeSectionTitle } from 'src/app/store/global-state.actions';
+import { Status } from 'src/app/store/models/status';
 
 @Component({
   selector: 'app-status-container',
@@ -11,20 +14,25 @@ import { StatusState } from '../store/status.reducer';
 })
 export class StatusContainerComponent implements OnInit {
 
-  public status: any[];
+  public status: Status[];
+  private title: string = 'Number of launches';
 
-  constructor(private store: Store<State>) {}
+  constructor(private globalStore: Store<GlobalState>, private localStore: Store<State>) {}
 
   ngOnInit() {
+    this.changeSectionTitle(this.title);
     this.loadAllStatus();
 
-    this.store.select('status').subscribe((statusState: StatusState) => {
+    this.localStore.select('status').subscribe((statusState: StatusState) => {
       this.status = statusState.allStatus;
     });
   }
 
+  private changeSectionTitle(newTitle: string) {
+    this.globalStore.dispatch(new ChangeSectionTitle(newTitle));
+  }
+
   private loadAllStatus() {
-    this.store.dispatch(new LoadStatus());
-    console.log('Se carga lista de estados');
+    this.localStore.dispatch(new LoadStatus());
   }
 }

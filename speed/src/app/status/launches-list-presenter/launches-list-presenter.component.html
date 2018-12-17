@@ -1,7 +1,18 @@
-<ul class="unstyled-list">
-  <li *ngFor="let launch of launchesList">
-    <a class="link" [routerLink]= "['/launches/', launch.id]">
-      {{launch.name}}
-    </a>
-  </li>
-</ul>
+<section id="sorting-buttons">
+  <p>Order launches by date:</p>
+  <button id="button-asc" type="button" (click)="sortLaunchesAsc.next()">
+    Ascendant
+  </button>
+  <button id="button-desc" type="button" (click)="sortLaunchesDesc.next()">
+    Descendant
+  </button>
+</section>
+<section id="launches-list">
+  <ul class="unstyled-list">
+    <li *ngFor="let launch of launchesList">
+      <a class="link" [routerLink]= "['/launches/', launch.id]">
+        {{launch.name}}
+      </a>
+    </li>
+  </ul>
+</section>

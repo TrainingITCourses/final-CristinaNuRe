@@ -1,5 +1,13 @@
 <section id="status-container">
-    <app-launches-list-presenter
-      [launchesList] = "launches"
-    ></app-launches-list-presenter>
-  </section>
+  
+  <app-launches-counter-presenter
+    [launchesCount] = "launchesCount"
+  ></app-launches-counter-presenter>
+  
+  <app-launches-list-presenter
+    [launchesList] = "filteredLaunches"
+    (sortLaunchesAsc) ="onSortLaunchesAscendant($event)"
+    (sortLaunchesDesc) ="onSortLaunchesDescendant($event)"
+  ></app-launches-list-presenter>
+
+</section>

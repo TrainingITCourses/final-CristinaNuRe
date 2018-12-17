@@ -4,7 +4,6 @@ import { Launch } from 'src/app/store/models/launch';
 export interface StatusState {
   allStatus: any[],
   allLaunches: Launch[],
-  filteredLaunches: Launch[],
   loading: boolean,
   message: string
 }
@@ -12,7 +11,6 @@ export interface StatusState {
 export const initialState: StatusState = {
   allStatus: [],
   allLaunches: [],
-  filteredLaunches: [],
   loading: false,
   message: ''
 };
@@ -32,11 +30,11 @@ export function reducer(state = initialState, action: StatusActions): StatusStat
       return { ...state, allLaunches: action.payload, loading: false }
     case StatusActionTypes.LaunchesNotLoaded:
       return { ...state, message: action.payload };
-    case StatusActionTypes.OrderLaunchesAsc:
-      state.filteredLaunches.sort((launch1, launch2) => (launch1.name < launch2.name ? 1 : -1));
+    case StatusActionTypes.SortLaunchesAsc:
+      state.allLaunches.sort((launch1, launch2) => (launch1.windowstart > launch2.windowstart ? 1 : -1));
       return {... state};
-    case StatusActionTypes.OrderLaunchesDesc:
-      state.filteredLaunches.sort((launch1, launch2) => (launch1.name > launch2.name ? 1 : -1));
+    case StatusActionTypes.SortLaunchesDesc:
+      state.allLaunches.sort((launch1, launch2) => (launch1.windowstart < launch2.windowstart ? 1 : -1));
       return {... state};
     default:
       return state;

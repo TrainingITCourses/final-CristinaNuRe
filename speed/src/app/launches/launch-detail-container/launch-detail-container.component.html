@@ -1,3 +1,5 @@
-<p>
-  launch-detail-container works!
-</p>
+<section id="launch-detail-container">
+  <app-launch-detail-presenter *ngIf="launch"
+    [launch] = "launch"
+  ></app-launch-detail-presenter>
+</section>

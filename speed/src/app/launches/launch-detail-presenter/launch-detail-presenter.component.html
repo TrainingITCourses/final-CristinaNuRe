@@ -1,3 +1,12 @@
-<p>
-  launch-detail-presenter works!
-</p>
+<section id="launch-description">
+  <h3> {{launch.name}} </h3>
+  <h4> At {{ launch.location.name }} On {{ launch.net }}. </h4>
+</section>
+
+<section id="launch-missions" *ngIf="launch.missions && launch.missions[0]">
+    {{ launch.missions[0].description }}
+</section>
+
+<section id="launch-image">
+    <img [src]="launch.rocket.imageURL" alt="Photo of {{ launch.rocket.name }}">
+</section>

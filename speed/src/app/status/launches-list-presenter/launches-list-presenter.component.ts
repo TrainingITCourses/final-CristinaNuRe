@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,6 +9,8 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 export class LaunchesListPresenterComponent implements OnInit {
 
   @Input() public launchesList;
+  @Output() public sortLaunchesAsc = new EventEmitter();
+  @Output() public sortLaunchesDesc = new EventEmitter();
 
   constructor() { }
 

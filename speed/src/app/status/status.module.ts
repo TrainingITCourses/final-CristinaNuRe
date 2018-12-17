@@ -19,6 +19,11 @@ import { StatusEffects } from './store/status.effects';
     StoreModule.forFeature('status', fromStatus.reducer),
     EffectsModule.forFeature([StatusEffects])
   ],
-  declarations: [StatusContainerComponent, StatusListPresenterComponent, StatusDetailContainerComponent, LaunchesCounterPresenterComponent, LaunchesListPresenterComponent]
+  declarations: [
+    StatusContainerComponent, 
+    StatusListPresenterComponent, 
+    StatusDetailContainerComponent, 
+    LaunchesCounterPresenterComponent, 
+    LaunchesListPresenterComponent]
 })
 export class StatusModule { }

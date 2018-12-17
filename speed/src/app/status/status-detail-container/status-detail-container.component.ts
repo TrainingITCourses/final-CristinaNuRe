@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { StatusState } from '../store/status.reducer';
 import { Launch } from 'src/app/store/models/launch';
-import { LoadLaunches, OrderLaunchesAsc, OrderLaunchesDesc } from '../store/status.actions';
+import { LoadLaunches, SortLaunchesAsc, SortLaunchesDesc } from '../store/status.actions';
+import { GlobalState } from 'src/app/store/global-state.reducer';
+import { ChangeSectionTitle } from 'src/app/store/global-state.actions';
+import { Status } from 'src/app/store/models/status';
 
 @Component({
   selector: 'app-status-detail-container',
@@ -12,33 +15,49 @@ import { LoadLaunches, OrderLaunchesAsc, OrderLaunchesDesc } from '../store/stat
 })
 export class StatusDetailContainerComponent implements OnInit {
 
-  public allLaunches: Launch[];
   public filteredLaunches: Launch[];
-  public counter: number;
+  public launchesCount: number;
+  private selectedStatusId: number;
+  private selectedStatus: Status;
 
-  constructor(private route: ActivatedRoute, private store: Store<StatusState>) { }
+  constructor(private route: ActivatedRoute, 
+    private globalStore: Store<GlobalState>,
+    private localStore: Store<StatusState>) { }
 
   ngOnInit() {
+    this.selectedStatusId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadLaunches();
 
-    this.store.select<StatusState>('status').subscribe((statusState: StatusState) => {
-      this.allLaunches = statusState.allLaunches;
+    this.localStore.select<StatusState>('status').subscribe((statusState: StatusState) => {
+      if (!statusState.loading) {
+        this.selectedStatus = statusState.allStatus
+          .filter(status => status.id == this.selectedStatusId)[0];
+
+        this.setSectionTitle(this.selectedStatus.name);
+
+        this.filteredLaunches = statusState.allLaunches
+          .filter((launch: Launch) => launch.status == this.selectedStatusId);
+
+        this.launchesCount = this.filteredLaunches.length;
+      }
     });
   }
 
   private loadLaunches() {
-    const statusId = this.route.snapshot.paramMap.get('id');
-    // TODO cargan aqui los lanzamientos con el estado recibido -> loadLaunchesByStatusId
-    this.store.dispatch(new LoadLaunches);
-    console.log('Se carga lista de lanzamientos que tengan estado con id: ' + statusId);
+    this.localStore.dispatch(new LoadLaunches);
   }
 
-  public onOrderLaunches(ascOrder: Boolean) {
-    if (ascOrder) {
-      this.store.dispatch(new OrderLaunchesAsc());
-    } else {
-      this.store.dispatch(new OrderLaunchesDesc());
-    }
+  private setSectionTitle(statusName: string) {
+    let newTitle: string = 'Status Type: ' + statusName;
+    this.globalStore.dispatch(new ChangeSectionTitle(newTitle));
+  }
+
+  public onSortLaunchesAscendant() {
+      this.localStore.dispatch(new SortLaunchesAsc());
+  }
+
+  public onSortLaunchesDescendant() {
+    this.localStore.dispatch(new SortLaunchesDesc());
   }
 
 }

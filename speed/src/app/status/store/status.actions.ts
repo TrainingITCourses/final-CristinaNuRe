@@ -7,8 +7,8 @@ export enum StatusActionTypes {
   LoadLaunches = '[Status] Load Launches',
   LaunchesLoaded = '[Status] Launches Loaded',
   LaunchesNotLoaded = '[Status] Launches Not Loaded',
-  OrderLaunchesAsc = '[Status] Order Launches Ascendant',
-  OrderLaunchesDesc = '[Status] Order Launches Descendant'
+  SortLaunchesAsc = '[Status] Sort Launches Ascendant',
+  SortLaunchesDesc = '[Status] Sort Launches Descendant'
 }
 
 export class LoadStatus implements Action {
@@ -39,12 +39,12 @@ export class LaunchesNotLoaded implements Action {
   constructor(readonly payload: string) {};
 }
 
-export class OrderLaunchesAsc implements Action {
-  readonly type = StatusActionTypes.OrderLaunchesAsc;
+export class SortLaunchesAsc implements Action {
+  readonly type = StatusActionTypes.SortLaunchesAsc;
 }
 
-export class OrderLaunchesDesc implements Action {
-  readonly type = StatusActionTypes.OrderLaunchesDesc;
+export class SortLaunchesDesc implements Action {
+  readonly type = StatusActionTypes.SortLaunchesDesc;
 }
 
 export type StatusActions = LoadStatus 
@@ -53,5 +53,5 @@ export type StatusActions = LoadStatus
   | LoadLaunches
   | LaunchesLoaded
   | LaunchesNotLoaded
-  | OrderLaunchesAsc
-  | OrderLaunchesDesc;
+  | SortLaunchesAsc
+  | SortLaunchesDesc;
