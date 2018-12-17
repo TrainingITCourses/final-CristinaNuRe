@@ -10,7 +10,7 @@ import { LoadSectionTitle } from 'src/app/store/global-state.actions';
 })
 export class HeaderContainerComponent implements OnInit {
 
-  private title: string;
+  public title: string;
 
   constructor(private store: Store<GlobalState>) { }
 
