@@ -13,8 +13,6 @@ export const initialState: GlobalState = {
 export function reducer(state = initialState, action: GlobalStateActions): GlobalState {
   
   switch (action.type) {
-    case GlobalStateActionTypes.LoadSectionTitle:
-      return {... state};
     case GlobalStateActionTypes.ChangeSectionTitle:
       return {... state, sectionTitle: action.payload};
     default:

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { StatusState } from '../store/status.reducer';
 import { Launch } from 'src/app/store/models/launch';
-import { LoadLaunches, SortLaunchesAsc, SortLaunchesDesc } from '../store/status.actions';
+import { SortLaunchesAsc, SortLaunchesDesc } from '../store/status.actions';
 import { GlobalState } from 'src/app/store/global-state.reducer';
 import { ChangeSectionTitle } from 'src/app/store/global-state.actions';
 import { Status } from 'src/app/store/models/status';
@@ -26,7 +26,6 @@ export class StatusDetailContainerComponent implements OnInit {
 
   ngOnInit() {
     this.selectedStatusId = Number(this.route.snapshot.paramMap.get('id'));
-    this.loadLaunches();
 
     this.localStore.select<StatusState>('status').subscribe((statusState: StatusState) => {
       if (!statusState.loading) {
@@ -41,10 +40,6 @@ export class StatusDetailContainerComponent implements OnInit {
         this.launchesCount = this.filteredLaunches.length;
       }
     });
-  }
-
-  private loadLaunches() {
-    this.localStore.dispatch(new LoadLaunches);
   }
 
   private setSectionTitle(statusName: string) {
