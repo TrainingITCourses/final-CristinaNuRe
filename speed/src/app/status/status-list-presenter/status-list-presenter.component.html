@@ -1,6 +1,6 @@
-<ul>
+<ul class="unstyled-list">
   <li *ngFor="let status of statusList">
-    <a [routerLink]= "['/status/', status.id]">
+    <a class="link" [routerLink]= "['/status/', status.id]">
       {{status.name}}
     </a>
   </li>

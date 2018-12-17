@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { StatusState } from '../store/status.reducer';
 import { Launch } from 'src/app/store/models/launch';
-import { LoadLaunches } from '../store/status.actions';
+import { LoadLaunches, OrderLaunchesAsc, OrderLaunchesDesc } from '../store/status.actions';
 
 @Component({
   selector: 'app-status-detail-container',
@@ -12,7 +12,9 @@ import { LoadLaunches } from '../store/status.actions';
 })
 export class StatusDetailContainerComponent implements OnInit {
 
-  public launches: Launch[];
+  public allLaunches: Launch[];
+  public filteredLaunches: Launch[];
+  public counter: number;
 
   constructor(private route: ActivatedRoute, private store: Store<StatusState>) { }
 
@@ -20,7 +22,7 @@ export class StatusDetailContainerComponent implements OnInit {
     this.loadLaunches();
 
     this.store.select<StatusState>('status').subscribe((statusState: StatusState) => {
-      this.launches = statusState.allLaunches;
+      this.allLaunches = statusState.allLaunches;
     });
   }
 
@@ -29,6 +31,14 @@ export class StatusDetailContainerComponent implements OnInit {
     // TODO cargan aqui los lanzamientos con el estado recibido -> loadLaunchesByStatusId
     this.store.dispatch(new LoadLaunches);
     console.log('Se carga lista de lanzamientos que tengan estado con id: ' + statusId);
+  }
+
+  public onOrderLaunches(ascOrder: Boolean) {
+    if (ascOrder) {
+      this.store.dispatch(new OrderLaunchesAsc());
+    } else {
+      this.store.dispatch(new OrderLaunchesDesc());
+    }
   }
 
 }

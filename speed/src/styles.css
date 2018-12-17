@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.unstyled-list {
+    list-style: none;
+}
+
+a.link {
+    text-decoration: none;
+    color: black;
+}
+
+a.link:hover {
+    color: rebeccapurple;
+}

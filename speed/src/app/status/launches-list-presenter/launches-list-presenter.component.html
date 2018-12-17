@@ -1,3 +1,7 @@
-<p>
-  launches-list-presenter works!
-</p>
+<ul class="unstyled-list">
+  <li *ngFor="let launch of launchesList">
+    <a class="link" [routerLink]= "['/launches/', launch.id]">
+      {{launch.name}}
+    </a>
+  </li>
+</ul>

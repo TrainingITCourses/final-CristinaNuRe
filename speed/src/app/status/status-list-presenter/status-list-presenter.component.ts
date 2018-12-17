@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-status-list-presenter',
   templateUrl: './status-list-presenter.component.html',
   styleUrls: ['./status-list-presenter.component.css']
